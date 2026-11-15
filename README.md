@@ -7,7 +7,7 @@
 <p align="center">
   <b>Every call, transcribed on your own computer, and ready for your AI agent.</b><br>
   Earshot sits in your menu bar (or system tray), notices when a call starts in any app, and writes a clean transcript: you on one side, everyone else on the other. Nothing leaves your machine.<br>
-  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your computer over Bluetooth. Since 0.7.1 that works on Windows too.
+  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your computer over Bluetooth. Since 0.7.1 that works on Windows too, and since 0.7.2 you choose the phone's speech model at setup.
 </p>
 
 <p align="center">
@@ -106,7 +106,7 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
   <img src="docs/phone.png" width="760" alt="The Earshot phone app: ready to record, transcribing, settings, and dark mode">
 </p>
 
-- **Transcribed on the phone.** Speech recognition runs on the phone itself (NVIDIA Parakeet on Android, Apple's on-device recognizer on iPhone). The app has no internet access, and audio is never stored.
+- **Transcribed on the phone, your choice of model.** Before your first recording, the app asks how to turn speech into text: the speech recognition already built into the phone (Apple's on iPhone; Android's own, if the phone has its language installed), or NVIDIA Parakeet, a 136 MB download kept either in the phone's shared models (so our other apps can use the same copy, via [Garden](https://github.com/stefan814/garden)) or for Earshot only. You can change it later in Settings ▸ Speech model. Everything runs on the phone, and audio is never stored.
 - **Sent to your computer over Bluetooth.** On a Mac, open the Earshot menu ▸ **Pair a Phone (In-Person Meetings)…**; on Windows, the same item is in Earshot's tray menu. Scan the code it shows with the phone (in the app's Settings, tap **Pair with a computer**). After that, finished meetings go to the computer by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the computer confirms it has it. The transfer is encrypted with a key made at pairing. A phone pairs with one computer at a time.
 - **Knows your voice.** In Settings, **Teach my voice** has you read a short passage aloud. Your lines are then marked "Me", and other people become Speaker 1, 2, 3…. Only a voiceprint is kept.
 - **Record from anywhere.** A one-tap record button for the home screen (Android and iPhone), a Quick Settings tile (Android), and Lock Screen and Control Center buttons (iPhone). The button turns green while recording and yellow while the transcript is saved.
@@ -122,7 +122,7 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
 
 **On Windows**, the PC's Bluetooth adapter has to accept connections from a phone. Most built-in adapters do; some USB dongles don't, and the pairing window says so if yours can't.
 
-**Android:** download the `.apk` from the latest release (see [Install](#install)). It's about 175 MB, almost all of it the speech models. A newer version installs over the old one and keeps your meetings and pairing.
+**Android:** download the `.apk` from the latest release (see [Install](#install)). It's about 39 MB; if you choose Parakeet, the app downloads it once (136 MB). A newer version installs over the old one and keeps your meetings and pairing.
 
 **iPhone (iOS 26):** there's no App Store version yet. It can be built from Earshot's source with Xcode and installed on your own iPhone with a free Apple account. The source isn't public yet, so for now this is for people who have access to it.
 
@@ -184,8 +184,8 @@ Earshot doesn't summarize. That's your agent's job, with whichever model you cho
 - Speech recognition, speaker separation and mute detection all run on your computer.
 - Audio is transcribed as it arrives and then discarded. To keep recordings too, set `"saveAudio": true`. They're silent wherever you were muted.
 - The MCP server only listens on `127.0.0.1`, so other computers can't reach it. The Chrome extension can only talk to Earshot, and Earshot rejects requests from web pages.
-- The phone app has no internet permission at all. It talks only to your paired computer, over Bluetooth, and its waiting meetings are encrypted on the phone.
-- The only network requests are the speech-model download (Windows install) and a small check for new versions twice a day, which you can turn off.
+- The phone app talks to your paired computer over Bluetooth, and its waiting meetings are encrypted on the phone. It uses the internet only to download the Parakeet speech model, if you choose it; the download is checked against a fixed fingerprint and nothing is uploaded.
+- The only network requests are the speech-model downloads (Windows install; Parakeet on the phone, if you choose it) and a small check for new versions twice a day, which you can turn off.
 
 Everything is in a folder you own:
 
@@ -250,4 +250,4 @@ Earshot is free to use. It's built on:
 - The [Silero VAD](https://github.com/snakers4/silero-vad) voice detector.
 - NVIDIA's Streaming Sortformer model via [FluidAudio](https://github.com/FluidInference/FluidAudio), under the NVIDIA Open Model License.
 - NVIDIA NeMo SpeakerNet.
-- Phone app: NVIDIA [Parakeet TDT 110M](https://huggingface.co/nvidia/parakeet-tdt_ctc-110m) speech recognition and NVIDIA NeMo TitaNet-small voiceprints (both CC-BY-4.0) on Android; Apple's SpeechTranscriber and the CAM++ voiceprint model ([3D-Speaker](https://github.com/modelscope/3D-Speaker), via FluidAudio) on iPhone.
+- Phone app: NVIDIA [Parakeet TDT 110M](https://huggingface.co/nvidia/parakeet-tdt_ctc-110m) speech recognition and NVIDIA NeMo TitaNet-small voiceprints (both CC-BY-4.0), run with [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx); Android's and Apple's built-in speech recognition (SpeechTranscriber on iPhone); the CAM++ voiceprint model ([3D-Speaker](https://github.com/modelscope/3D-Speaker), via FluidAudio) on iPhone.

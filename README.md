@@ -111,6 +111,7 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
 - **Sent to your computer over Bluetooth.** On a Mac, open the Earshot menu ▸ **Pair a Phone (In-Person Meetings)…**; on Windows, the same item is in Earshot's tray menu. Scan the code it shows with the phone (in the app's Settings, tap **Pair with a computer**). After that, finished meetings go to the computer by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the computer confirms it has it. The transfer is encrypted with a key made at pairing. A phone pairs with one computer at a time.
 - **Knows your voice.** In Settings, **Teach my voice** has you read a short passage aloud. Your lines are then marked "Me", and other people become Speaker 1, 2, 3…. Only a voiceprint is kept.
 - **Record from anywhere.** A one-tap record button for the home screen (Android and iPhone), a Quick Settings tile (Android), and Lock Screen and Control Center buttons (iPhone). The button turns green while recording and yellow while the transcript is saved.
+- **Tells you about updates.** When a newer Earshot is out, a banner on the home screen says so. On Android, **Update** downloads it, checks it against the release's fingerprint and opens Android's installer (Android asks once to allow installs from Earshot). Turn it off in Settings ▸ Updates.
 - **Handy extras.** Meetings can be named from your calendar (read on the phone only), recording keeps going with the screen off, and it stops by itself after a stretch of silence.
 
 <p align="center">
@@ -186,8 +187,8 @@ Earshot doesn't summarize. That's your agent's job, with whichever model you cho
 - Speech recognition, speaker separation and mute detection all run on your computer.
 - Audio is transcribed as it arrives and then discarded. To keep recordings too, set `"saveAudio": true`. They're silent wherever you were muted.
 - The MCP server only listens on `127.0.0.1`, so other computers can't reach it. The Chrome extension can only talk to Earshot, and Earshot rejects requests from web pages.
-- The phone app talks to your paired computer over Bluetooth, and its waiting meetings are encrypted on the phone. It uses the internet only to download the Parakeet speech model, if you choose it; the download is checked against a fixed fingerprint and nothing is uploaded.
-- The only network requests are the speech-model downloads (Windows install; Parakeet on the phone, if you choose it) and a small check for new versions twice a day, which you can turn off.
+- The phone app talks to your paired computer over Bluetooth, and its waiting meetings are encrypted on the phone. It uses the internet only to download the Parakeet speech model, if you choose it, and to check for a newer version twice a day (you can turn that off). Downloads are checked against a fixed fingerprint and nothing is uploaded.
+- The only network requests are the speech-model downloads (Windows install; Parakeet on the phone, if you choose it) and a small check for new versions twice a day (computer and phone), which you can turn off.
 
 Everything is in a folder you own:
 
@@ -229,6 +230,8 @@ Edit `~/.earshot/config.json` (Windows: `%USERPROFILE%\.earshot\config.json`) an
 ## Updates
 
 When a new version is out, Earshot shows one notification and an **Update to Earshot X…** item in its menu. Click either one and Earshot updates and restarts in a few seconds, keeping your edition, permissions and meetings. If you're on a call, it waits until the call ends. Running the install command again also updates.
+
+The phone app checks too, from version 0.7.5: a banner on its home screen, and on Android one tap to download and install. Phones on an older version need the new `.apk` once, by hand.
 
 ## Troubleshooting
 

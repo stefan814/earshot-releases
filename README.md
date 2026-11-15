@@ -7,7 +7,7 @@
 <p align="center">
   <b>Every call, transcribed on your own computer, and ready for your AI agent.</b><br>
   Earshot sits in your menu bar (or system tray), notices when a call starts in any app, and writes a clean transcript: you on one side, everyone else on the other. Nothing leaves your machine.<br>
-  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your Mac over Bluetooth.
+  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your computer over Bluetooth. Since 0.7.1 that works on Windows too.
 </p>
 
 <p align="center">
@@ -85,8 +85,8 @@ The first time it runs, Earshot asks for:
 | 👥 | **Speaker separation** (Full) | NVIDIA's Sortformer model on Mac and a speaker-embedding model on Windows turn "Them" into Speaker 1, 2, 3…, entirely on your computer. Rename speakers from your agent. |
 | 🏷️ | **Names and titles** (Mac) | With Accessibility on, Earshot takes the meeting topic, the participant list and who's talking from Zoom and Google Meet captions. The transcript text is still Earshot's own. |
 | 💬 | **Chat and shared links** | Zoom and Google Meet chat messages, and links shared in the call, are saved with the meeting. |
-| 🎚️ | **Choose which calls** (Mac) | **Transcribe Calls From** in the menu has a switch for each app and web service, so you can leave out, say, FaceTime or Discord. |
-| 📱 | **In-person meetings** | The phone app transcribes meetings in the room and sends them to Earshot on your Mac, where they join your other meetings and your agent can read them. |
+| 🎚️ | **Choose which calls** | **Transcribe Calls From** in the menu (the tray menu on Windows) has a switch for each app and web service, so you can leave out, say, FaceTime or Discord. |
+| 📱 | **In-person meetings** | The phone app transcribes meetings in the room and sends them to Earshot on your Mac or Windows PC, where they join your other meetings and your agent can read them. |
 | 🤖 | **MCP server** | 16+ tools for listing, reading, searching and controlling meetings. Works with any MCP client. |
 | ♻️ | **Picks up where it left off** | If Earshot quits, crashes or the computer sleeps mid-call, the same meeting carries on instead of splitting into fragments. |
 | 🩺 | **Health checks** | Earshot watches for anything that would quietly stop it recording (a permission switched off, a full disk, a missing model) and shows a fix in its menu. |
@@ -107,7 +107,7 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
 </p>
 
 - **Transcribed on the phone.** Speech recognition runs on the phone itself (NVIDIA Parakeet on Android, Apple's on-device recognizer on iPhone). The app has no internet access, and audio is never stored.
-- **Sent to your Mac over Bluetooth.** On the Mac, open the Earshot menu ▸ **Pair a Phone (In-Person Meetings)…** and scan the code it shows with the phone. After that, finished meetings go to the Mac by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the Mac confirms it has it. The transfer is encrypted with a key made at pairing.
+- **Sent to your computer over Bluetooth.** On a Mac, open the Earshot menu ▸ **Pair a Phone (In-Person Meetings)…**; on Windows, the same item is in Earshot's tray menu. Scan the code it shows with the phone (in the app's Settings, tap **Pair with a computer**). After that, finished meetings go to the computer by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the computer confirms it has it. The transfer is encrypted with a key made at pairing. A phone pairs with one computer at a time.
 - **Knows your voice.** In Settings, **Teach my voice** has you read a short passage aloud. Your lines are then marked "Me", and other people become Speaker 1, 2, 3…. Only a voiceprint is kept.
 - **Record from anywhere.** A one-tap record button for the home screen (Android and iPhone), a Quick Settings tile (Android), and Lock Screen and Control Center buttons (iPhone). The button turns green while recording and yellow while the transcript is saved.
 - **Handy extras.** Meetings can be named from your calendar (read on the phone only), recording keeps going with the screen off, and it stops by itself after a stretch of silence.
@@ -115,6 +115,12 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
 <p align="center">
   <img src="docs/widget.png" width="460" alt="The record button: ready (white) and recording (green), on Android and iPhone">
 </p>
+
+<p align="center">
+  <img src="docs/windows-phone.png" width="420" alt="Pairing a phone on Windows: the Earshot on Your Phone window with its QR code">
+</p>
+
+**On Windows**, the PC's Bluetooth adapter has to accept connections from a phone. Most built-in adapters do; some USB dongles don't, and the pairing window says so if yours can't.
 
 **Android:** download the `.apk` from the latest release (see [Install](#install)). It's about 175 MB, almost all of it the speech models. A newer version installs over the old one and keeps your meetings and pairing.
 
@@ -178,7 +184,7 @@ Earshot doesn't summarize. That's your agent's job, with whichever model you cho
 - Speech recognition, speaker separation and mute detection all run on your computer.
 - Audio is transcribed as it arrives and then discarded. To keep recordings too, set `"saveAudio": true`. They're silent wherever you were muted.
 - The MCP server only listens on `127.0.0.1`, so other computers can't reach it. The Chrome extension can only talk to Earshot, and Earshot rejects requests from web pages.
-- The phone app has no internet permission at all. It talks only to your paired Mac, over Bluetooth, and its waiting meetings are encrypted on the phone.
+- The phone app has no internet permission at all. It talks only to your paired computer, over Bluetooth, and its waiting meetings are encrypted on the phone.
 - The only network requests are the speech-model download (Windows install) and a small check for new versions twice a day, which you can turn off.
 
 Everything is in a folder you own:

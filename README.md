@@ -7,7 +7,7 @@
 <p align="center">
   <b>Every call, transcribed on your own computer, and ready for your AI agent.</b><br>
   Earshot sits in your menu bar (or system tray), notices when a call starts in any app, and writes a clean transcript: you on one side, everyone else on the other. Nothing leaves your machine.<br>
-  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your computer over Bluetooth. Since 0.7.1 that works on Windows too, and since 0.7.2 you choose the phone's speech model at setup.
+  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your computer over Bluetooth (Mac and Windows). New in 0.7.4: browser calls you join <b>without your mic</b> are recorded too.
 </p>
 
 <p align="center">
@@ -35,7 +35,7 @@
 
 ## Why Earshot
 
-- **It just starts.** No calendar to connect and no bot joining the call. When Zoom, Teams, Meet or any other call app starts using your microphone, Earshot starts transcribing. When the call ends, it stops.
+- **It just starts.** No calendar to connect and no bot joining the call. When Zoom, Teams, Meet or any other call app starts using your microphone, Earshot starts transcribing. It also catches calls you join just to listen, with your mic off: Zoom's app, and Meet, Zoom, Teams and other call sites in the browser. When the call ends, it stops.
 - **It knows when you're muted.** Earshot reads the mute button in the call app. Whatever you say while muted stays out of the transcript.
 - **"Me" and "Them", always.** Your microphone and the call's audio are recorded separately, so every line is attributed correctly. The full edition also tells the other people apart.
 - **Built for agents.** A local MCP server lets Claude, Codex, Cursor or any other MCP client read, search and control your calls. Ask "what did we agree on in my 2pm?" and your agent has the transcript.
@@ -81,6 +81,7 @@ The first time it runs, Earshot asks for:
 | | Feature | |
 |---|---|---|
 | 🎙️ | **Automatic start and stop** | Zoom, Teams, Google Meet, Slack huddles, FaceTime, Webex, Discord, WhatsApp, Telegram, Skype, RingCentral, and calls in Chrome, Edge, Arc, Brave, Firefox, Safari and other browsers. |
+| 🎧 | **Calls you only listen to** (Mac) | Joined without your mic? Zoom's app is caught by its meeting window (with Accessibility on). In the browser, the Chrome extension sees the call on Google Meet, Zoom, Teams, Slack, Webex, Whereby and Jitsi, and on any site you add under **Always Record Calls On** in the menu. Your mic stays off until the call turns it on. |
 | 🔇 | **Mute awareness** | Reads the call app's mute button. On web calls, the Chrome extension also checks whether the page is actually sending your audio. Muted speech is left out. |
 | 👥 | **Speaker separation** (Full) | NVIDIA's Sortformer model on Mac and a speaker-embedding model on Windows turn "Them" into Speaker 1, 2, 3…, entirely on your computer. Rename speakers from your agent. |
 | 🏷️ | **Names and titles** (Mac) | With Accessibility on, Earshot takes the meeting topic, the participant list and who's talking from Zoom and Google Meet captions. The transcript text is still Earshot's own. |
@@ -93,7 +94,7 @@ The first time it runs, Earshot asks for:
 | ⬆️ | **One-click updates** | It offers new versions itself and installs them when you click. Never during a call. |
 
 <p align="center">
-  <img src="docs/menu.png" width="236" alt="The Earshot menu">
+  <img src="docs/menu.png" width="244" alt="The Earshot menu">
   &nbsp;&nbsp;&nbsp;
   <img src="docs/about.png" width="330" alt="About Earshot">
 </p>
@@ -106,7 +107,7 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
   <img src="docs/phone.png" width="760" alt="The Earshot phone app: ready to record, transcribing, settings, and dark mode">
 </p>
 
-- **Transcribed on the phone, your choice of model.** Before your first recording, the app asks how to turn speech into text: the speech recognition already built into the phone (Apple's on iPhone; Android's own, if the phone has its language installed), or NVIDIA Parakeet, a 136 MB download kept either in the phone's shared models (so our other apps can use the same copy, via [Garden](https://github.com/stefan814/garden)) or for Earshot only. You can change it later in Settings ▸ Speech model. Everything runs on the phone, and audio is never stored.
+- **Transcribed on the phone, your choice of model.** Before your first recording, the app asks how to turn speech into text: NVIDIA Parakeet, a 136 MB download kept either in the phone's shared models (so our other apps can use the same copy, via [Garden](https://github.com/stefan814/garden)) or for Earshot only, or the speech recognition already built into the phone (Apple's on iPhone; Android's own, if the phone has its language installed). The app recommends Parakeet in the shared models: in our tests it got about half as many words wrong as the built-in recognizers when people talk across a room (5–9% against 10–12%). The choice is yours, and you can change it later in Settings ▸ Speech model. Everything runs on the phone, and audio is never stored.
 - **Sent to your computer over Bluetooth.** On a Mac, open the Earshot menu ▸ **Pair a Phone (In-Person Meetings)…**; on Windows, the same item is in Earshot's tray menu. Scan the code it shows with the phone (in the app's Settings, tap **Pair with a computer**). After that, finished meetings go to the computer by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the computer confirms it has it. The transfer is encrypted with a key made at pairing. A phone pairs with one computer at a time.
 - **Knows your voice.** In Settings, **Teach my voice** has you read a short passage aloud. Your lines are then marked "Me", and other people become Speaker 1, 2, 3…. Only a voiceprint is kept.
 - **Record from anywhere.** A one-tap record button for the home screen (Android and iPhone), a Quick Settings tile (Android), and Lock Screen and Control Center buttons (iPhone). The button turns green while recording and yellow while the transcript is saved.
@@ -131,7 +132,8 @@ The phone apps only transcribe meetings in the room. Phones don't let other apps
 ## How it works
 
 ```
-  call app opens the mic ──► Earshot notices (within a second)
+  call app opens the mic, or a call's ──► Earshot notices (within a second)
+  meeting window or web page appears
                                    │
             ┌──────────────────────┴──────────────────────┐
      your microphone                                 the call's audio
@@ -149,7 +151,7 @@ The phone apps only transcribe meetings in the room. Phones don't let other apps
                     MCP server on 127.0.0.1:8796 ──► your AI agent
 ```
 
-A call ends when the call app stops using the microphone and speakers for 25 seconds, or when its meeting window closes. You can also start and stop by hand from the menu or through MCP.
+A call ends when the call app stops using the microphone and speakers for 25 seconds, or when its meeting window closes. In a browser it ends 25 seconds after the call does (the browser's mic, or the call the extension sees in the tab), even if the browser keeps playing sound. You can also start and stop by hand from the menu or through MCP.
 
 ## For AI agents (MCP)
 

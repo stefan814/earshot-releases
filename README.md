@@ -84,10 +84,11 @@ The first time it runs, Earshot asks for:
 | 🎧 | **Calls you only listen to** (Mac) | Joined without your mic? Zoom's app is caught by its meeting window (with Accessibility on). In the browser, the Chrome extension sees the call on Google Meet, Zoom, Teams, Slack, Webex, Whereby and Jitsi, and on any site you add at the bottom of **Record Calls From** in the menu. Your mic stays off until the call turns it on. |
 | 🔇 | **Mute awareness** | Reads the call app's mute button. On web calls, the Chrome extension also checks whether the page is actually sending your audio. Muted speech is left out. |
 | 👥 | **Speaker separation** (Full) | NVIDIA's Sortformer model on Mac and a speaker-embedding model on Windows turn "Them" into Speaker 1, 2, 3…, entirely on your computer. Rename speakers from your agent. |
-| 🏷️ | **Names and titles** (Mac) | With Accessibility on, Earshot takes the meeting topic, the participant list and who's talking from Zoom and Google Meet captions. The transcript text is still Earshot's own. |
+| 🏷️ | **Names and titles** (Mac) | With Accessibility on, Earshot takes the meeting topic, the participant list and who's talking from Zoom and Google Meet captions and Teams' speaking highlight. The transcript text is still Earshot's own. A call with no title is named after the app and time ("Slack call — Nov 16, 3:04 PM"); your agent can rename it. |
 | 💬 | **Chat and shared links** | Zoom and Google Meet chat messages, and links shared in the call, are saved with the meeting. |
-| 🎚️ | **Choose which calls** | **Record Calls From** in the menu has a switch for each call app you have installed and each web service, so you can leave out, say, FaceTime or Discord. A service's switch covers its calls in the app and in the browser; a browser's own switch covers calls on other sites. |
+| 🎚️ | **Choose which calls** | **Record Calls From** in the menu has a switch for each call app you have installed and each web service, so you can leave out, say, FaceTime or Discord. A service's switch covers its calls in the app and in the browser; a browser's own switch covers calls on other sites. For a single call, **Pause Recording** in the menu stops the transcript until you resume, and **Pause Earshot** stops it watching for calls at all. |
 | 📱 | **In-person meetings** | The phone app transcribes meetings in the room and sends them to Earshot on your Mac or Windows PC, where they join your other meetings and your agent can read them. |
+| 🌐 | **Languages** | On the Mac, any language Apple's on-device speech recognition supports: set `locale` in [Settings](#settings) (English by default). Windows and Parakeet on the phone are English only; the phone's built-in recognizer uses the languages installed on the phone. |
 | 🤖 | **MCP server** | 16+ tools for listing, reading, searching and controlling meetings. Works with any MCP client. |
 | ♻️ | **Picks up where it left off** | If Earshot quits, crashes or the computer sleeps mid-call, the same meeting carries on instead of splitting into fragments. |
 | 🩺 | **Health checks** | Earshot watches for anything that would quietly stop it recording (a permission switched off, a full disk, a missing model) and shows a fix in its menu. |
@@ -98,6 +99,14 @@ The first time it runs, Earshot asks for:
   &nbsp;&nbsp;&nbsp;
   <img src="docs/about.png" width="330" alt="About Earshot">
 </p>
+
+### Who's who
+
+- **You** are "Me": your microphone is recorded on its own, so this needs no voice training. Anyone sitting at your computer with you shares your mic, so they're "Me" too.
+- **Everyone on the other end** gets their real name when the call app shows it (captions, the participant list, who's highlighted as speaking). When it can't, the Full edition tells voices apart by sound: Speaker 1, 2, 3…. That includes several people sharing one mic in a meeting room, since the call app sees them as one participant. Lite calls anyone it can't name "Them".
+- **On the phone**, everyone in the room comes through one mic, so it goes by voice alone: teach it your voice and you're "Me", and everyone else is Speaker 1, 2, 3….
+
+You can rename any speaker from your agent.
 
 ## Phone app for in-person meetings
 
@@ -185,6 +194,7 @@ Earshot doesn't summarize. That's your agent's job, with whichever model you cho
 ## Privacy and your data
 
 - Speech recognition, speaker separation and mute detection all run on your computer.
+- **Telling people is up to you.** Recording laws vary, and some places need everyone's consent. Earshot doesn't join the call as a bot, so nobody else can see it's recording.
 - Audio is transcribed as it arrives and then discarded. To keep recordings too, set `"saveAudio": true`. They're silent wherever you were muted.
 - The MCP server only listens on `127.0.0.1`, so other computers can't reach it. The Chrome extension can only talk to Earshot, and Earshot rejects requests from web pages.
 - The phone app talks to your paired computer over Bluetooth, and its waiting meetings are encrypted on the phone. It uses the internet only to download the Parakeet speech model, if you choose it, and to check for a newer version twice a day (you can turn that off). Downloads are checked against a fixed fingerprint and nothing is uploaded.
@@ -220,6 +230,7 @@ Edit `~/.earshot/config.json` (Windows: `%USERPROFILE%\.earshot\config.json`) an
 | Setting | Default | |
 |---|---|---|
 | `checkForUpdates` | `true` | Look for new versions twice a day |
+| `locale` | `"en-US"` | The language you speak in calls, e.g. `"de-DE"` (Mac; Windows is English only) |
 | `saveAudio` | `false` | Also keep the audio of each call |
 | `detectAnyApp` | `false` | Treat any app that uses the mic as a call, not just known call apps |
 | `apps` | built-in list | Which apps count as call apps |
@@ -248,6 +259,8 @@ Something not working, or an idea? Use **Send Feedback**: on the Mac and Windows
 **My words were transcribed while I was muted.** Earshot reads the call app's own mute button; a hardware mute switch or muting in system settings isn't visible to it. For web calls, install the Chrome extension from the menu (**Settings ▸ Set Up Chrome Extension…**).
 
 **After updating to 0.6.1, macOS asked for permissions again.** Expected once. Earshot's internal name changed from its old one, so macOS treats it as a new app. You can remove the old SuperCall entries from each list in System Settings → Privacy & Security.
+
+**Other people's words show up as "Me".** On speakers, the call's sound can leak into your microphone. Earshot cancels the echo and drops lines that repeat what the other side said, but headphones avoid it completely.
 
 **Windows blocks it completely.** On PCs with Smart App Control turned on, Windows blocks apps without a paid signature, and there's no "run anyway". It's off on most PCs.
 

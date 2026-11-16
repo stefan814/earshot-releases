@@ -85,7 +85,7 @@ The first time it runs, Earshot asks for:
 | 👥 | **Speaker separation** (Full) | NVIDIA's Sortformer model on Mac and a speaker-embedding model on Windows turn "Them" into Speaker 1, 2, 3…, entirely on your computer. Rename speakers from your agent. |
 | 🏷️ | **Names and titles** (Mac) | With Accessibility on, Earshot takes the meeting topic, the participant list and who's talking from Zoom and Google Meet captions. The transcript text is still Earshot's own. |
 | 💬 | **Chat and shared links** | Zoom and Google Meet chat messages, and links shared in the call, are saved with the meeting. |
-| 🎚️ | **Choose which calls** | **Record Calls From** in the menu has a switch for each call app you have installed and each web service, so you can leave out, say, FaceTime or Discord. A service's switch covers its calls in the app and in the browser; a browser's own switch covers calls on other sites. (On Windows it's **Transcribe Calls From** in the tray menu.) |
+| 🎚️ | **Choose which calls** | **Record Calls From** in the menu has a switch for each call app you have installed and each web service, so you can leave out, say, FaceTime or Discord. A service's switch covers its calls in the app and in the browser; a browser's own switch covers calls on other sites. |
 | 📱 | **In-person meetings** | The phone app transcribes meetings in the room and sends them to Earshot on your Mac or Windows PC, where they join your other meetings and your agent can read them. |
 | 🤖 | **MCP server** | 16+ tools for listing, reading, searching and controlling meetings. Works with any MCP client. |
 | ♻️ | **Picks up where it left off** | If Earshot quits, crashes or the computer sleeps mid-call, the same meeting carries on instead of splitting into fragments. |
@@ -107,7 +107,7 @@ Earshot on your computer hears calls. For meetings in a room, put your phone on 
 </p>
 
 - **Transcribed on the phone, your choice of model.** Before your first recording, the app asks how to turn speech into text: NVIDIA Parakeet, a 136 MB download kept either in the phone's shared models (so our other apps can use the same copy, via [Garden](https://github.com/stefan814/garden)) or for Earshot only, or the speech recognition already built into the phone (Apple's on iPhone; Android's own, if the phone has its language installed). The app recommends Parakeet in the shared models: in our tests it got about half as many words wrong as the built-in recognizers when people talk across a room (5–9% against 10–12%). The choice is yours, and you can change it later in Settings ▸ Speech model. Everything runs on the phone, and audio is never stored.
-- **Sent to your computer over Bluetooth.** On a Mac, open the Earshot menu ▸ **Settings ▸ Pair a Phone (In-Person Meetings)…**; on Windows, the same item is in Earshot's tray menu. Scan the code it shows with the phone (in the app's Settings, tap **Pair with a computer**). After that, finished meetings go to the computer by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the computer confirms it has it. The transfer is encrypted with a key made at pairing. A phone pairs with one computer at a time.
+- **Sent to your computer over Bluetooth.** Open the Earshot menu (the tray menu on Windows) ▸ **Settings ▸ Pair a Phone (In-Person Meetings)…**. Scan the code it shows with the phone (in the app's Settings, tap **Pair with a computer**). After that, finished meetings go to the computer by themselves when the two are near each other, or when you tap Send. The phone deletes its copy once the computer confirms it has it. The transfer is encrypted with a key made at pairing. A phone pairs with one computer at a time.
 - **Knows your voice.** In Settings, **Teach my voice** has you read a short passage aloud. Your lines are then marked "Me", and other people become Speaker 1, 2, 3…. Only a voiceprint is kept.
 - **Record from anywhere.** A one-tap record button for the home screen (Android and iPhone), a Quick Settings tile (Android), and Lock Screen and Control Center buttons (iPhone). The button turns green while recording and yellow while the transcript is saved.
 - **Tells you about updates.** When a newer Earshot is out, a banner on the home screen says so. On Android, **Update** downloads it, checks it against the release's fingerprint and opens Android's installer (Android asks once to allow installs from Earshot). Turn it off in Settings ▸ Updates.
@@ -155,7 +155,7 @@ A call ends when the call app stops using the microphone and speakers for 25 sec
 
 ## For AI agents (MCP)
 
-Earshot runs an MCP server at `http://127.0.0.1:8796/mcp` (Streamable HTTP), on this computer only. The menu's **Settings ▸ Copy MCP Server URL** copies the address (on Windows, **Copy MCP Server URL** in the tray menu).
+Earshot runs an MCP server at `http://127.0.0.1:8796/mcp` (Streamable HTTP), on this computer only. The menu's **Settings ▸ Copy MCP Server URL** copies the address (the tray menu's, on Windows).
 
 **Claude Code:**
 
@@ -240,7 +240,7 @@ The phone app checks too, from version 0.7.5: a banner on its home screen, and o
 
 **No meeting titles or participant names (Mac).** Allow Earshot under Privacy & Security → Accessibility.
 
-**My words were transcribed while I was muted.** Earshot reads the call app's own mute button; a hardware mute switch or muting in system settings isn't visible to it. For web calls, install the Chrome extension from the menu (**Settings ▸ Set Up Chrome Extension…** on a Mac, **Set Up Chrome Extension…** in the Windows tray menu).
+**My words were transcribed while I was muted.** Earshot reads the call app's own mute button; a hardware mute switch or muting in system settings isn't visible to it. For web calls, install the Chrome extension from the menu (**Settings ▸ Set Up Chrome Extension…**).
 
 **After updating to 0.6.1, macOS asked for permissions again.** Expected once. Earshot's internal name changed from its old one, so macOS treats it as a new app. You can remove the old SuperCall entries from each list in System Settings → Privacy & Security.
 

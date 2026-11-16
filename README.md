@@ -243,7 +243,7 @@ The phone app checks too, from version 0.7.5: a banner on its home screen, and o
 
 **My words were transcribed while I was muted.** Earshot reads the call app's own mute button; a hardware mute switch or muting in system settings isn't visible to it. For web calls, install the Chrome extension from the menu (**Settings ▸ Set Up Chrome Extension…** on a Mac, **Set Up Chrome Extension…** in the Windows tray menu).
 
-**After updating to 0.6.1, macOS asked for permissions again.** Expected once. Earshot's internal name changed from its old one, so macOS treats it as a new app. You can remove the old entries with `tccutil reset All io.github.stefan814.supercall`.
+**After updating to 0.6.1, macOS asked for permissions again.** Expected once. Earshot's internal name changed from its old one, so macOS treats it as a new app. You can remove the old SuperCall entries from each list in System Settings → Privacy & Security.
 
 **Windows blocks it completely.** On PCs with Smart App Control turned on, Windows blocks apps without a paid signature, and there's no "run anyway". It's off on most PCs.
 

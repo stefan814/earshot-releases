@@ -29,6 +29,7 @@
 - [Privacy and your data](#privacy-and-your-data)
 - [Settings](#settings)
 - [Updates](#updates)
+- [Feedback](#feedback)
 - [Troubleshooting](#troubleshooting)
 - [Credits](#credits)
 
@@ -231,6 +232,10 @@ Edit `~/.earshot/config.json` (Windows: `%USERPROFILE%\.earshot\config.json`) an
 When a new version is out, Earshot shows one notification and an **Update to Earshot X…** item in its menu. Click either one and Earshot updates and restarts in a few seconds, keeping your edition, permissions and meetings. If you're on a call, it waits until the call ends. Running the install command again also updates.
 
 The phone app checks too, from version 0.7.5: a banner on its home screen, and on Android one tap to download and install. Phones on an older version need the new `.apk` once, by hand.
+
+## Feedback
+
+Something not working, or an idea? Use **Send Feedback**: on the Mac and Windows it's in Earshot's menu (Settings ▸ Send Feedback…), and on the phone it's in Settings ▸ Feedback. Write what happened and Earshot attaches its logs to an email to earshotproject@gmail.com. You see the email before it's sent. The logs include meeting titles, but never transcripts or audio.
 
 ## Troubleshooting
 

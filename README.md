@@ -6,8 +6,7 @@
 
 <p align="center">
   <b>Every call, transcribed on your own computer, and ready for your AI agent.</b><br>
-  Earshot sits in your menu bar (or system tray), notices when a call starts in any app, and writes a clean transcript: you on one side, everyone else on the other. Nothing leaves your machine.<br>
-  New in 0.7: a phone app for <b>in-person meetings</b>, transcribed on the phone and sent to your computer over Bluetooth (Mac and Windows). New in 0.7.4: browser calls you join <b>without your mic</b> are recorded too.
+  Earshot sits in your menu bar (or system tray), notices when a call starts in any app, and writes a clean transcript: you on one side, everyone else on the other. Nothing leaves your machine.
 </p>
 
 <p align="center">

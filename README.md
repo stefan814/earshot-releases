@@ -41,6 +41,8 @@
 - **Built for agents.** A local MCP server lets Claude, Codex, Cursor or any other MCP client read, search and control your calls. Ask "what did we agree on in my 2pm?" and your agent has the transcript.
 - **Private by design.** Speech recognition runs on your computer. Audio is never sent anywhere and isn't kept.
 
+**Recording laws differ by place.** In some, everyone in a conversation must agree to be recorded. Getting that agreement is up to you, the person running Earshot.
+
 ## Install
 
 **Mac** (Apple silicon, macOS 26 or later). Open Terminal and paste:

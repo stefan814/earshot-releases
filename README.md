@@ -165,6 +165,17 @@ The phone apps only transcribe meetings in the room. Phones don't let other apps
 
 A call ends when the call app stops using the microphone and speakers for 25 seconds, or when its meeting window closes. In a browser it ends 25 seconds after the call does (the browser's mic, or the call the extension sees in the tab), even if the browser keeps playing sound. You can also start and stop by hand from the menu or through MCP.
 
+### Power use
+
+Measured on 19 November 2026 with Earshot 0.8.4, transcribing a recording of steady speech:
+
+| Device | While transcribing | How it was measured |
+|---|---|---|
+| Mac Studio (M2 Ultra) | about a third of one CPU core (Earshot 23%, Apple's speech recognizer 6%, the audio system 5%) and roughly 2 W more than idle | `powermetrics` and per-process CPU time, two 8-minute recordings against two 8-minute idle periods |
+| Pixel 10a | about 130 mAh an hour, or roughly 2.5% of the battery per hour, not counting the screen | Android's own battery accounting for Earshot over 6 minutes, with the screen mostly on |
+
+Between calls, while Earshot waits for one to start, it used under 1% of one core on the Mac. It took a few minutes after a recording ended to get back down to that. The phone app does nothing at all until you press Record. The Mac numbers are from a desktop, so they don't give a battery percentage for a MacBook. The phone was on a USB cable, so its figure is Android's estimate, not a measured drop in charge. Windows and iPhone haven't been measured yet.
+
 ## For AI agents (MCP)
 
 Earshot runs an MCP server at `http://127.0.0.1:8796/mcp` (Streamable HTTP), on this computer only. The menu's **Settings ▸ Copy MCP Server URL** copies the address (the tray menu's, on Windows).
